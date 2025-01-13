@@ -1,0 +1,36 @@
+.title {
+    font-family: 'RobotoMedium';
+    letter-spacing: .6px;
+
+    &--main {
+        color: var(--color-text-main);
+    }
+
+    &--second {
+        color: var(--color-text-second);
+    }
+    
+    &--primary {
+        color: var(--color-main);
+    }
+
+    &--red {
+        color: var(--color-red);
+    }
+
+    &--warning {
+        color: var(--color-warning);
+    }
+
+    &--xs {
+        font-size: 20px;
+    }
+
+    &--md {
+        font-size: 24px;
+    }
+
+    &--lg {
+        font-size: 28px;
+    }
+}

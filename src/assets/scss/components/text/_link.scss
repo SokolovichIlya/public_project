@@ -1,0 +1,26 @@
+.link {
+    position: relative;
+    display: inline;
+
+    color: var(--color-main);
+    text-decoration: none;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+
+        width: 0px;
+        height: 1px;
+
+        transition: .3s;
+        background-color: var(--color-main);
+    }
+
+    &:hover::before,
+    &.active::before {
+        width: 100%;
+    }
+}

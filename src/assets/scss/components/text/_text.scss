@@ -1,0 +1,36 @@
+.text {
+    font-family: 'Roboto';
+    letter-spacing: .4px;
+
+    &--main {
+        color: var(--color-text-main);
+    }
+
+    &--second {
+        color: var(--color-text-second);
+    }
+    
+    &--primary {
+        color: var(--color-main);
+    }
+
+    &--red {
+        color: var(--color-red);
+    }
+
+    &--warning {
+        color: var(--color-warning);
+    }
+
+    &--xs {
+        font-size: 14px;
+    }
+
+    &--md {
+        font-size: 16px; 
+    }
+
+    &--lg {
+        font-size: 18px;
+    }
+}

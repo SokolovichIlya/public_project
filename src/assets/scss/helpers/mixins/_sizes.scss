@@ -1,0 +1,19 @@
+@mixin mWidth($sizes: $sizes) {
+    @each $key, $value in $sizes {
+        .w-#{$key} {
+            width: $value !important;
+        }
+    }
+}
+
+@include mWidth($sizes);
+
+@mixin mHeight($sizes: $sizes) {
+    @each $key, $value in $sizes {
+        .h-#{$key} {
+            height: $value !important;
+        }
+    }
+}
+
+@include mHeight($sizes);

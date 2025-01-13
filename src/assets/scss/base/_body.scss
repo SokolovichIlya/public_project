@@ -1,0 +1,22 @@
+html, body, #app {
+    min-height: 100%;
+    height: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background: -webkit-linear-gradient(44deg, #dfdeac,#e0c4ad,#e1dfde);                          
+    background: linear-gradient(44deg, #dfdeac,#e0c4ad,#e1dfde);        
+                                   
+    &.block-scroll {
+        overflow: hidden;
+    }
+}
