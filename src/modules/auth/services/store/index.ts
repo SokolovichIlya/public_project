@@ -2,12 +2,12 @@ import Cookie from 'js-cookie'
 
 import { defineStore } from 'pinia'
 import type { IAuthState } from '../interfaces/store'
-import { IUser } from '../interfaces/api'
+import { IEmployee } from '../interfaces/api'
 
 export const useAuthStore = defineStore('authStore', { 
     state: () => ({
         token: Cookie.get('token') || null,
-        user: Cookie.get('user') || null,
+        employee: Cookie.get('employee') ? JSON.parse(Cookie.get('employee') as string) : null,
         school: Cookie.get('school') || null,
     }) as IAuthState,
 
@@ -17,10 +17,10 @@ export const useAuthStore = defineStore('authStore', {
             Cookie.set('token', this.token)
         },
 
-        setUser(user: IUser) : void {
-            this.user = user
+        setEmployee(employee: IEmployee) : void {
+            this.employee = employee
 
-            Cookie.set('user', String(user.id))
+            Cookie.set('employee', JSON.stringify(employee))
         },
 
         setSchool(school: string) : void { 
@@ -31,11 +31,11 @@ export const useAuthStore = defineStore('authStore', {
 
         logoutSystem() : void {
             this.token = null
-            this.user = null
+            this.employee = null
             this.school = null
             
             Cookie.remove('token')
-            Cookie.remove('user')
+            Cookie.remove('employee')
             Cookie.remove('school')
         },
     },

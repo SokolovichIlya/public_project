@@ -1,7 +1,7 @@
-import type { IUser } from './api'
+import type { IEmployee } from './api'
 
 export interface IAuthState {
     token: string | null
-    user: IUser | null
+    employee: IEmployee | null
     school: string | null
 }
