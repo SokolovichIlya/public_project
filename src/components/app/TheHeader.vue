@@ -10,7 +10,7 @@
                     <font-awesome-icon icon="home" />
                 </router-link>
                 <router-link to="/" class="header__link">
-                    <font-awesome-icon icon="file" />
+                    <font-awesome-icon icon="table" />
                 </router-link>
                 <router-link to="/" class="header__link">
                     <font-awesome-icon icon="user" />

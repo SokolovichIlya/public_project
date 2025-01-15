@@ -7,14 +7,34 @@ import permissions from '../middlewares/permissions.global'
 
 import { isEmpty } from 'lodash'
 
+import authRoutes from '@/modules/auth/services/routes'
+import modulesRoutes from '@/modules/router'
+
 const globalPermissions : string[] = []
 
 const routes = [
 	{
 		path: '/',
-		name: 'home',
-		component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
+        name: 'home',
+		component: () => import(/* webpackChunkName: "home" */ '@/views/LoadingView.vue'),
+        children: [
+            {
+                path: '/:employeeUuid',
+                name: 'loading.set.data',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/ParentView.vue'),
+                props: true,
+                children: [
+                    {
+                        path: 'home',
+                        name: 'documents',
+                        component: () => import(/* webpackChunkName: "home" */ '@/modules/documents/home/views/HomeView.vue'),
+                    },
+                    ...modulesRoutes,
+                ]
+            }
+        ]
 	},
+    ...authRoutes,
 ] as Array<RouteRecordRaw>
 
 const router = createRouter({

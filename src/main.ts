@@ -2,7 +2,6 @@ import { createApp, type DefineComponent } from 'vue'
 import App from './App.vue'
 
 import router from './services/router'
-import './modules/router'
 
 import { createPinia } from 'pinia'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,12 +11,14 @@ import {
     faFile,
     faUser,
     faDoorOpen,
+    faClose,
+    faPen,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import globalComponents from './components/global'
 
-library.add(faHome, faTable, faFile, faUser, faDoorOpen)
+library.add(faHome, faTable, faFile, faUser, faDoorOpen, faClose, faPen)
 
 const pinia = createPinia()
 const app = createApp(App)

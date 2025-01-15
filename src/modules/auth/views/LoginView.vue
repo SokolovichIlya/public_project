@@ -69,7 +69,7 @@ export default defineComponent({
                     store.setToken(data.access)
                     store.setSchool(data.employee.school.uuid)
                     
-                    router.push('/')
+                    router.push({ name: 'home' })
                 }
             } catch (error: any) {
                 if (error.status === 403) {

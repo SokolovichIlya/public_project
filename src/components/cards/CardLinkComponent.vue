@@ -1,5 +1,5 @@
 <template>
-    <div class="card card--medium">
+    <div :class="`card--${size}`" class="card card-link">
         <slot />
     </div>
 </template>
@@ -8,7 +8,14 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'CardComponent',
+    name: 'CardLinkComponent',
+
+    props: {
+        size: {
+            type: String,
+            default:'medium'
+        },
+    },
 })
 </script>
 
@@ -20,6 +27,15 @@ export default defineComponent({
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     border-radius: 20px;
+
+    &-link {
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+            background-color: var(--color-main);
+        }
+    }
 
     &--small {
         width: 100px;
