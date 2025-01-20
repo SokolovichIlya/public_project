@@ -47,3 +47,7 @@ $window-size: 1340px;
 
 $header-height: 140px;
 $header-height-xs: 65px;
+
+:root {
+    --el-dialog-border-radius: 15px !important;
+}

@@ -16,6 +16,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 import globalComponents from './components/global'
 
 library.add(faHome, faTable, faFile, faUser, faDoorOpen, faClose, faPen)
@@ -33,5 +36,6 @@ for (const key in globalComponents) {
 }
 
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(ElementPlus)
 
 app.mount('#app')

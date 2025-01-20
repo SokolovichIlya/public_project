@@ -11,6 +11,7 @@
                 <CardsWrapper>
                     <DocumentCardComponents 
                         v-for="(card, index) in listDocumentsCards" 
+                        @click="showModal(card.form)"
                         :key="`document-card-${index}`"
                         :title="card.title"
                         :description="card.description"
@@ -55,6 +56,7 @@
                                 <p class="list__text">{{ student.birthday }}</p>
                             </div>
                             <div class="list__column list__column--25 list__column--right">
+                                <IconButton type="secondary" size="small" icon="file" />
                                 <IconButton type="secondary" size="small" icon="pen" />
                                 <IconButton type="secondary" size="small" icon="close" />
                             </div>
@@ -63,6 +65,8 @@
                 </div>
             </BlockComponent>
         </div>
+
+        <DocumentsModal :typeDocument="typeDocument" ref="documentModal" />
     </MainLayout>
 </template>
 
@@ -78,11 +82,14 @@ import type { IStudyClass } from '@/modules/education/services/interfaces/api'
 import { getStudents } from '@/modules/students/services/api/index'
 import type { IStudentsList } from '@/modules/students/services/interfaces/api'
 
+import DocumentsModal from '../../common/components/DocumentsModal.vue'
+
 export default defineComponent({
     name: 'HomeView',
 
     components: {
         DocumentCardComponents,
+        DocumentsModal,
     },
 
     setup() {
@@ -91,21 +98,25 @@ export default defineComponent({
                 title: 'Категория',
                 description: 'Создать документ о присвоенной категории',
                 icon: 'file',
+                form: 'category',
             },
             {
                 title: 'КПК',
                 description: 'Создать документ о курсах повышения квалификации',
                 icon: 'file',
+                form: 'kpk',
             },
             {
                 title: 'Публикация',
                 description: 'Создать документ о публикации',
                 icon: 'file',
+                form: 'publication',
             },
             {
                 title: 'Профильная смена',
                 description: 'Создать документ о профильной смене',
                 icon: 'file',
+                form: 'profile_change',
             },
         ]
 
@@ -113,6 +124,9 @@ export default defineComponent({
         const employee = computed(() => store.employee)
         const currentClass = ref<IStudyClass>()
         const students = ref<IStudentsList>()
+        const documentModal = ref()
+
+        let typeDocument = ref<string>('category')
             
         async function getEducationData() {
             const { data } = await getStudyClasses({
@@ -130,10 +144,21 @@ export default defineComponent({
 
         getEducationData()
 
+        function showModal(form: string) {
+            typeDocument.value = form
+
+            documentModal.value.open()
+        }
+
         return {
             listDocumentsCards,
             employee,
             students,
+
+            documentModal,
+            typeDocument,
+
+            showModal,
         }
     },
 })
@@ -244,7 +269,7 @@ export default defineComponent({
 
     &__data {
         padding: 20px;
-        background-color: var(--gray-50);
+        background-color: var(--color-bg-light);
         border-radius: 20px;
     }
 }

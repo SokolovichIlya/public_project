@@ -1,3 +1,25 @@
 h1, h2, h3, h4, h4, p {
     margin: 0;
 }
+
+.el-tag__content,
+.el-empty__description,
+.el-tabs__item,
+.el-message__content,
+.el-textarea__inner,
+.el-select,
+.el-select-dropdown__item,
+.el-pager,
+.el-popconfirm__main,
+.el-form-item__label,
+.el-upload-list__item-file-name {
+    font-family: 'Roboto' !important;
+}
+
+th.el-table__cell {
+    font-family: 'RobotoMedium';
+}
+
+.el-dialog__title {
+    font-family: 'RobotoMedium';
+}

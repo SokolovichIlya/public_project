@@ -1,5 +1,5 @@
 <template>
-    <button :class="`button--${type} button--${size}`" class="button"><slot /></button>
+    <button :class="`button--${type} button--${size}`" :type="nativeType" class="button"><slot /></button>
 </template>
 
 <script lang="ts">
@@ -15,7 +15,11 @@ export default defineComponent({
         },
         size: {
             type: String,
-            default: 'medium'
+            default: 'medium',
+        },
+        nativeType: {
+            type: String,
+            default: 'submit',
         },
     },
 })
