@@ -1,7 +1,7 @@
 <template>
     <el-form :model="form" :rules="rules" label-position="left" ref="form" label-width="250px">
         <el-form-item label="ФИО" prop="fio">
-            <el-input v-model="form.fio" placeholder=""></el-input>
+            <el-input :value="form.fio" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="Категория" prop="category_type">
             <el-select class="w-100" v-model="form.category_type" placeholder="">
@@ -17,7 +17,7 @@
             <el-input v-model="form.category_name" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="Период участия с/по" prop="category_date_from">
-            <el-col :span="7">
+            <el-col :span="11">
                 <el-form-item prop="category_date_from">
                     <el-date-picker
                         v-model="form.category_date_from"
@@ -28,8 +28,8 @@
                     </el-date-picker>
                 </el-form-item>
             </el-col>
-            <el-col class="line" :span="1">-</el-col>
-            <el-col :span="7">
+            <el-col :span="2" />
+            <el-col :span="11">
                 <el-form-item prop="category_date_to">
                     <el-date-picker
                         v-model="form.category_date_to"
@@ -70,11 +70,11 @@
                 action=""
                 ref="category_document"
             >
-                <el-button size="small" type="primary">Нажмите для загрузки</el-button>
+                <Button size="small" type="primary">Нажмите для загрузки</Button>
             </el-upload>
         </el-form-item>
         <el-form-item label="Участие в профильных сменах" prop="participation_in_profile_shifts">
-            <el-select class="w-100" v-model="form.participation_in_profile_shifts">
+            <el-select class="w-100" v-model="form.participation_in_profile_shifts" placeholder="">
                 <el-option :value="true" label="Да"></el-option>
                 <el-option :value="false" label="Нет"></el-option>
             </el-select>
@@ -86,18 +86,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive, PropType } from 'vue'
 
 import { levelList, resultList, typeCategoryList } from '@/services/configs/documents'
+import type { IStudent } from '@/modules/students/services/interfaces/api'
 
 export default defineComponent({ 
     name: 'StudentForm',
+
+    props: {
+        student: {
+            type: Object as PropType<IStudent>,
+            required: true,
+        },
+    },
     
     emits: ['submit'],
 
-    setup() {
+    setup(props) {
         const form = ref({
-            fio: '',
+            fio: `${props.student.last_name} ${props.student.first_name} ${props.student.middle_name}`,
             teacher: null,
             category_type: '',
             category_name: '',
@@ -109,7 +117,7 @@ export default defineComponent({
             participation_in_profile_shifts: false,
             name_program: '',
         })
-        
+
         const rules = reactive({
             fio: [
                 { required: true, message: 'Это обязательное поле', trigger: 'blur' }

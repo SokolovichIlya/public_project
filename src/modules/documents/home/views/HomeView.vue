@@ -56,7 +56,7 @@
                                 <p class="list__text">{{ student.birthday }}</p>
                             </div>
                             <div class="list__column list__column--25 list__column--right">
-                                <IconButton type="secondary" size="small" icon="file" />
+                                <IconButton @click="showStudentModal(student)" type="secondary" size="small" icon="file" />
                                 <IconButton type="secondary" size="small" icon="pen" />
                                 <IconButton type="secondary" size="small" icon="close" />
                             </div>
@@ -66,7 +66,7 @@
             </BlockComponent>
         </div>
 
-        <DocumentsModal :typeDocument="typeDocument" ref="documentModal" />
+        <DocumentsModal :type-document="typeDocument" :student="editedStudent" ref="documentModal" />
     </MainLayout>
 </template>
 
@@ -80,7 +80,7 @@ import { getStudyClasses } from '@/modules/education/services/api'
 import type { IStudyClass } from '@/modules/education/services/interfaces/api'
 
 import { getStudents } from '@/modules/students/services/api/index'
-import type { IStudentsList } from '@/modules/students/services/interfaces/api'
+import type { IStudent, IStudentsList } from '@/modules/students/services/interfaces/api'
 
 import DocumentsModal from '../../common/components/DocumentsModal.vue'
 
@@ -127,6 +127,7 @@ export default defineComponent({
         const documentModal = ref()
 
         let typeDocument = ref<string>('category')
+        let editedStudent = ref<IStudent>()
             
         async function getEducationData() {
             const { data } = await getStudyClasses({
@@ -150,6 +151,12 @@ export default defineComponent({
             documentModal.value.open()
         }
 
+        function showStudentModal(student: IStudent) {
+            editedStudent.value = student
+
+            showModal('student')
+        }
+
         return {
             listDocumentsCards,
             employee,
@@ -157,8 +164,10 @@ export default defineComponent({
 
             documentModal,
             typeDocument,
+            editedStudent,
 
             showModal,
+            showStudentModal,
         }
     },
 })

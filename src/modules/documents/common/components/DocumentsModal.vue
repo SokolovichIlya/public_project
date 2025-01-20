@@ -9,17 +9,18 @@
         <Category v-if="typeDocument === 'category'" />
         <KPK v-if="typeDocument === 'kpk'" />
         <Publication v-if="typeDocument === 'publication'" />
-        <Student v-if="typeDocument === 'student'" />
+        <Student v-if="typeDocument === 'student'" :student="student" />
     </el-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 import Category from './documents/Category.vue'
 import KPK from './documents/KPK.vue'
 import Publication from './documents/Publication.vue'
 import Student from './documents/Student.vue'
+import { IStudent } from '@/modules/students/services/interfaces/api'
 
 export default defineComponent({
     name: 'DocumentsModal',
@@ -35,6 +36,11 @@ export default defineComponent({
         typeDocument: {
             type: String,
             required: true,
+        },
+
+        student: {
+            type: Object as PropType<IStudent>,
+            default: () => ({}),
         },
     },
 

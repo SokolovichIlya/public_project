@@ -30,7 +30,7 @@
                     </el-date-picker>
                 </el-form-item>
             </el-col>
-            <el-col class="line" :span="2">-</el-col>
+            <el-col :span="2"></el-col>
             <el-col :span="11">
                 <el-form-item prop="date_to">
                     <el-date-picker
@@ -74,10 +74,8 @@
                 <Button native-type="button" size="small" type="primary">Нажмите для загрузки</Button>
             </el-upload>
         </el-form-item>
-        <el-form-item>
-            <el-button>Отмена</el-button>
-            <el-button @click.prevent="sendForm" type="primary">Сохранить</el-button>
-        </el-form-item>
+        <el-button>Отмена</el-button>
+        <Button @click.prevent="sendForm" type="secondary">Сохранить</Button>
     </el-form>
 </template>
 
