@@ -25,7 +25,7 @@
                 description="В списке учеников вы можете как сформировать документы о заслугах ученика, так и справки для ученика или класса"
             >
                 <template #header-button>
-                    <Button type="secondary" class="button">Добавить ученика</Button>
+                    <Button @click="goToCreateStudent" type="secondary" class="button">Добавить ученика</Button>
                 </template>
                 <div class="filters">
                     <div class="filters__item">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="list__column list__column--25 list__column--right">
                                 <IconButton @click="showStudentModal(student)" type="secondary" size="small" icon="file" />
-                                <IconButton type="secondary" size="small" icon="pen" />
+                                <IconButton @click="goToEditStudent(student.uuid)" type="secondary" size="small" icon="pen" />
                                 <IconButton type="secondary" size="small" icon="close" />
                             </div>
                         </div>
@@ -77,12 +77,13 @@ import DocumentCardComponents from '../components/DocumentCardComponents.vue'
 import { useAuthStore } from '@/modules/auth/services/store'
 
 import { getStudyClasses } from '@/modules/education/services/api'
-import type { IStudyClass } from '@/modules/education/services/interfaces/api'
+import type { IStudyClassMainData } from '@/modules/education/services/interfaces/api'
 
 import { getStudents } from '@/modules/students/services/api/index'
 import type { IStudent, IStudentsList } from '@/modules/students/services/interfaces/api'
 
 import DocumentsModal from '../../common/components/DocumentsModal.vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
     name: 'HomeView',
@@ -121,8 +122,10 @@ export default defineComponent({
         ]
 
         const store = useAuthStore()
+        const router = useRouter()
+
         const employee = computed(() => store.employee)
-        const currentClass = ref<IStudyClass>()
+        const currentClass = computed(() : IStudyClassMainData => store.study_classes[0])
         const students = ref<IStudentsList>()
         const documentModal = ref()
 
@@ -130,12 +133,6 @@ export default defineComponent({
         let editedStudent = ref<IStudent>()
             
         async function getEducationData() {
-            const { data } = await getStudyClasses({
-                teacher: employee.value?.uuid,
-            })
-
-            currentClass.value = data.data[0]
-
             const { data: studentsData } = await getStudents({
                 study_class: currentClass.value.uuid,
             })
@@ -157,6 +154,14 @@ export default defineComponent({
             showModal('student')
         }
 
+        async function goToCreateStudent() {
+            router.push({ name: 'student.create' })
+        }
+
+        async function goToEditStudent(studentUuid: string) {
+            router.push({ name: 'student.edit', params: { studentUuid } })
+        }
+
         return {
             listDocumentsCards,
             employee,
@@ -168,6 +173,8 @@ export default defineComponent({
 
             showModal,
             showStudentModal,
+            goToCreateStudent,
+            goToEditStudent,
         }
     },
 })

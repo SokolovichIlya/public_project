@@ -1,4 +1,5 @@
-import { ISchool } from '@/services/interfaces/school'
+import type { IStudyClassMainData } from '@/modules/education/services/interfaces/api'
+import type { ISchool } from '@/services/interfaces/school'
 import type { IUser } from '@/services/interfaces/user'
 
 export interface IEmployee {
@@ -16,7 +17,7 @@ export interface IAuthParams {
 export interface IAuthResponseLogin {
     access: string
     refresh: string
-    user: IUser
+    study_classes: IStudyClassMainData[]
     employee: IEmployee
 }
 

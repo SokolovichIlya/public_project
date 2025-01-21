@@ -1,7 +1,7 @@
 <template>
     <div class="block">
         <div class="block__header block__block">
-            <div>
+            <div class="block__header-title">
                 <h3 v-if="title" class="block__title">{{ title }}</h3>
                 <p v-if="description" class="block__description">{{ description }}</p>
             </div>
@@ -44,10 +44,15 @@ export default defineComponent({
     }
 
     &__header {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid var(--gray-100);
+
+        &-title {
+            width: 70%;
+        }
     }
 
     &__title {

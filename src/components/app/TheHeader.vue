@@ -6,16 +6,16 @@
                 <h1>cholomatic</h1>
             </div>
             <nav class="header__nav">
-                <router-link to="/" class="header__link header__link--active">
+                <router-link :to="{ name: 'documents' }" exact active-class="header__link--active" class="header__link">
                     <font-awesome-icon icon="home" />
                 </router-link>
-                <router-link to="/" class="header__link">
+                <router-link :to="{ name: 'roster' }" exact active-class="header__link--active" class="header__link">
                     <font-awesome-icon icon="table" />
                 </router-link>
-                <router-link to="/" class="header__link">
+                <router-link :to="{ name: 'user' }" exact active-class="header__link--active" class="header__link">
                     <font-awesome-icon icon="user" />
                 </router-link>
-                <a @click.prevent="handleLogout" to="/" class="header__link">
+                <a @click.prevent="handleLogout" class="header__link">
                     <font-awesome-icon icon="door-open" />
                 </a>
             </nav>

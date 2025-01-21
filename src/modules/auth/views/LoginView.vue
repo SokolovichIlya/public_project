@@ -68,6 +68,7 @@ export default defineComponent({
                     store.setEmployee(data.employee)
                     store.setToken(data.access)
                     store.setSchool(data.employee.school.uuid)
+                    store.setStudyClasses(data.study_classes)
                     
                     router.push({ name: 'home' })
                 }

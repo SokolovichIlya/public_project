@@ -19,3 +19,9 @@ export interface IStudyClassesListApiParams {
     name?: string
     teacher?: string
 }
+
+export interface IStudyClassMainData {
+    uuid: string
+    number: string
+    letter: string
+}

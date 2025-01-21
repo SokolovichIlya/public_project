@@ -9,4 +9,9 @@ export default [
             isGuestAccess: true,
         },
     },
+    {
+        path: '/user',
+        name: 'user',
+        component: () => import(/* webpackChunkName: "auth" */ '../../views/LoginView.vue'),
+    },
 ] as Array<RouteRecordRaw>
