@@ -1,4 +1,6 @@
-export function middlewarePipeline(context: any, middlewares: any, index: number): any {
+import { type RouterContext } from '../router'
+
+export function middlewarePipeline(context: RouterContext, middlewares: any, index: number): any {
     const nextMiddleware = middlewares[index]
 
     if (!nextMiddleware) {

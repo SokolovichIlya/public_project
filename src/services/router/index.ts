@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 
 import { middlewarePipeline } from '../middlewares'
 
@@ -42,7 +43,13 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+export interface RouterContext {
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext,
+}
+
+router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
 	const middlewares: any = to.meta.middlewares || []
 
 	if (!to.meta.isGuestAccess) {
@@ -60,7 +67,7 @@ router.beforeEach((to, from, next) => {
         return next()
     }
 
-    const context: any = {
+    const context: RouterContext = {
         to,
         from,
         next,
